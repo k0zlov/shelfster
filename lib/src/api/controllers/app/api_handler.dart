@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:shelfster/src/api/controllers/rest/middlewares/app_middleware.dart';
 import 'package:shelfster/src/api/route/http_method.dart';
 import 'package:shelfster/src/api/request/request_context.dart';
 import 'package:shelfster/src/api/request/request_validation.dart';

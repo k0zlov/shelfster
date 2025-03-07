@@ -8,7 +8,7 @@ import 'package:shelf_router/shelf_router.dart';
 import 'package:shelf_swagger_ui/shelf_swagger_ui.dart';
 import 'package:shelfster/src/api/controllers/app/api_handler.dart';
 import 'package:shelfster/src/api/controllers/app/app_controller.dart';
-import 'package:shelfster/src/api/controllers/rest/middlewares/app_middleware.dart';
+import 'package:shelfster/src/api/controllers/rest/middlewares/default_middleware.dart';
 import 'package:shelfster/src/api/route/app_route.dart';
 import 'package:shelfster/src/api/swagger/open_api_generator.dart';
 
