@@ -14,3 +14,4 @@ export 'package:shelfster/src/api/request/request_validation.dart';
 export 'package:shelfster/src/api/route/app_route.dart';
 export 'package:shelfster/src/api/route/http_method.dart';
 export 'package:shelfster/src/run_server.dart';
+export 'package:shelfster/src/app_server.dart';
