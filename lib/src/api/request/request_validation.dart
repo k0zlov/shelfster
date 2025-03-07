@@ -82,7 +82,7 @@ Future<void> validateRequest({
     for (final Parameter<Object> parameter in body) {
       final dynamic value = bodyParams[parameter.name];
 
-      if (value == null) {
+      if (value == null && !parameter.isRequired) {
         errors.add('Body parameter "${parameter.name}" was not provided.');
         continue;
       }
