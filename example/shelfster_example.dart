@@ -3,7 +3,6 @@ import 'dart:io';
 
 import 'package:shelf/shelf.dart';
 import 'package:shelfster/shelfster.dart';
-import 'package:shelfster/src/api/route/route_tree.dart';
 
 FutureOr<Response> handler(RequestContext context) => Response.ok('123');
 

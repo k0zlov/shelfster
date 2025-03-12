@@ -13,11 +13,16 @@ class ApiServer {
   ApiServer({
     required this.openApiConfig,
     required this.routeTree,
-    this.apiVersion,
+    String? apiVersion,
     this.middlewares = const [],
-  });
+  }) {
+    _apiVersion = apiVersion ??
+        Pubspec.parse(
+          File('pubspec.yaml').readAsStringSync(),
+        ).version.toString();
+  }
 
-  final String? apiVersion;
+  late final String _apiVersion;
   final OpenApiConfig openApiConfig;
   final RouteTree routeTree;
   final List<Object> middlewares;
@@ -26,6 +31,7 @@ class ApiServer {
   final Router _utilityRouter = Router();
 
   Future<void> start({
+    List<String>? args,
     int port = 8080,
     Object? ip,
   }) async {
@@ -33,7 +39,7 @@ class ApiServer {
       throw Exception('Server has already started');
     }
 
-    _generateSwaggerSpec();
+    _generateUtilityRoute();
 
     final mainRouter = routeTree.build();
 
@@ -54,25 +60,34 @@ class ApiServer {
         .handler;
 
     _server = await serve(combinedHandler, ip ?? InternetAddress.anyIPv4, port);
+
+    final bool firstStart =
+        args?.any((arg) => arg.startsWith('--first-start=')) ?? false;
+
+    if (firstStart) {
+      print('Server running at ${_server?.address}:${_server?.port}');
+    }
+
     _server!.autoCompress = true;
   }
 
-  final Pubspec pubspec = Pubspec.parse(
-    File('pubspec.yaml').readAsStringSync(),
-  );
-
   /// Generates openapi.json and mounts Swagger UI on /docs
-  void _generateSwaggerSpec() {
+  void _generateUtilityRoute() {
     final spec = OpenApiGenerator.generate(
-      apiVersion: apiVersion ?? pubspec.version.toString(),
+      apiVersion: _apiVersion,
       routes: routeTree.routes,
       config: openApiConfig,
     );
     File('openapi.json').writeAsStringSync(jsonEncode(spec));
 
-    _utilityRouter.get(
-      '/docs',
-      SwaggerUI.fromFile(File('openapi.json')).call,
-    );
+    _utilityRouter
+      ..get(
+        '/docs',
+        SwaggerUI.fromFile(File('openapi.json')).call,
+      )
+      ..get(
+        '/info',
+        (request) => Response.ok({'apiVersion': _apiVersion}),
+      );
   }
 }
