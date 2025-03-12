@@ -87,7 +87,7 @@ class ApiServer {
       )
       ..get(
         '/info',
-        (request) => Response.ok({'apiVersion': _apiVersion}),
+        (request) => Response.ok(jsonEncode({'apiVersion': _apiVersion})),
       );
   }
 }
