@@ -5,8 +5,8 @@ import 'package:shelfster/src/api/request/request_context.dart';
 import 'package:shelfster/src/validation/validation_result.dart';
 import 'package:shelfster/src/validation/validator.dart';
 
-class Parameter<T> {
-  Parameter(
+class Field<T> {
+  Field(
     this.name, {
     this.validators = const [],
     this.isRequired = true,
@@ -71,15 +71,15 @@ class Parameter<T> {
 
 Future<void> validateRequest({
   required RequestContext context,
-  required Set<Parameter<Object>> body,
-  required Set<Parameter<Object>> query,
+  required Set<Field<Object>> body,
+  required Set<Field<Object>> query,
 }) async {
   final errors = <String>[];
 
   if (body.isNotEmpty) {
     final Map<String, dynamic> bodyParams = await context.params.body;
 
-    for (final Parameter<Object> parameter in body) {
+    for (final Field<Object> parameter in body) {
       final dynamic value = bodyParams[parameter.name];
 
       if (value == null && parameter.isRequired) {
@@ -99,7 +99,7 @@ Future<void> validateRequest({
   if (query.isNotEmpty) {
     final Map<String, dynamic> queryParams = context.params.query;
 
-    for (final Parameter<Object> parameter in query) {
+    for (final Field<Object> parameter in query) {
       final dynamic value = queryParams[parameter.name];
 
       if (value == null && parameter.isRequired) {

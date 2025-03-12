@@ -1,8 +1,8 @@
-import 'package:shelfster/src/api/controllers/app/api_handler.dart';
+import 'package:shelfster/src/api/handlers/api_handler.dart';
 import 'package:shelfster/src/api/route/http_method.dart';
 
-class AppWebsocket extends ApiHandler {
-  AppWebsocket({
+class ApiWebsocket extends ApiHandler {
+  ApiWebsocket({
     required super.name,
     required super.handler,
     super.description,

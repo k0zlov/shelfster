@@ -1,7 +1,7 @@
-import 'package:shelfster/src/api/controllers/app/app_controller.dart';
+import 'package:shelfster/shelfster.dart';
 
-abstract class AppRoute {
-  const AppRoute();
+abstract class ApiRoute {
+  const ApiRoute();
 
   String get name {
     final className = runtimeType.toString();
@@ -9,5 +9,5 @@ abstract class AppRoute {
     return firstWord;
   }
 
-  Set<AppController> get controllers;
+  Set<ApiHandler> get handlers;
 }

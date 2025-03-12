@@ -1,6 +1,6 @@
 name: shelfster
 description: A starting point for Dart libraries or applications.
-version: 1.0.1
+version: 1.0.2
 # repository: https://github.com/my_org/my_repo
 
 environment:
@@ -8,13 +8,16 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  openapi_spec: ^0.7.26
+  pubspec_parse: ^1.4.0
   shelf: ^1.4.2
   shelf_cors_headers: ^0.1.5
   shelf_router: ^1.1.4
   shelf_swagger_ui: ^2.0.0
   swagger_dart_code_generator: ^3.0.1
+  watcher: ^1.1.1
   # path: ^1.8.0
 
 dev_dependencies:
-  lints: ^4.0.0
   test: ^1.24.0
+  very_good_analysis: ^5.1.0

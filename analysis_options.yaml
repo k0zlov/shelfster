@@ -1,30 +1,40 @@
-# This file configures the static analysis results for your project (errors,
-# warnings, and lints).
-#
-# This enables the 'recommended' set of lints from `package:lints`.
-# This set helps identify many issues that may lead to problems when running
-# or consuming Dart code, and enforces writing Dart using a single, idiomatic
-# style and format.
-#
-# If you want a smaller set of lints you can change this to specify
-# 'package:lints/core.yaml'. These are just the most critical lints
-# (the recommended set includes the core lints).
-# The core lints are also what is used by pub.dev for scoring packages.
+include: package:very_good_analysis/analysis_options.yaml
 
-include: package:lints/recommended.yaml
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+  errors:
+    invalid_annotation_target: ignore
 
-# Uncomment the following section to specify additional rules.
+linter:
+  rules:
+    sort_pub_dependencies: false
 
-# linter:
-#   rules:
-#     - camel_case_types
+    lines_longer_than_80_chars: false
 
-# analyzer:
-#   exclude:
-#     - path/to/excluded/files/**
+    omit_local_variable_types: false
 
-# For more information about the core and recommended set of lints, see
-# https://dart.dev/go/core-lints
+    use_key_in_widget_constructors: true
 
-# For additional information about configuring this file, see
-# https://dart.dev/guides/language/analysis-options
+    always_use_package_imports: true
+
+    prefer_const_constructors: true
+
+    prefer_const_declarations: true
+
+    prefer_single_quotes: true
+
+    avoid_init_to_null: true
+
+    #   Sort constructor declarations before other members.
+    sort_constructors_first: true
+
+    #   Sort child properties last in widget instance creations.
+    sort_child_properties_last: true
+
+    #   DO use Flutter TO DO format. // TO DO(username): message, https://URL-to-issue.
+    flutter_style_todos: true
+
+    #   DO follow the directive ordering conventions in Effective Dart:
+    directives_ordering: true

@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:shelfster/src/api/route/http_method.dart';
+import 'package:shelf/shelf.dart';
 import 'package:shelfster/src/api/request/request_context.dart';
 import 'package:shelfster/src/api/request/request_validation.dart';
-import 'package:shelf/shelf.dart';
+import 'package:shelfster/src/api/route/http_method.dart';
 
 typedef AppHandler = FutureOr<Response> Function(RequestContext context);
 
@@ -28,8 +28,8 @@ abstract class ApiHandler {
   final AppHandler _handler;
   final HttpMethod method;
 
-  final Set<Parameter<Object>> bodySchema;
-  final Set<Parameter<Object>> querySchema;
+  final Set<Field<Object>> bodySchema;
+  final Set<Field<Object>> querySchema;
 
   Handler call() {
     return (Request request) async {
