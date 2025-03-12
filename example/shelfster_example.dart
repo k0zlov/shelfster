@@ -84,7 +84,7 @@ class TestRoute extends ApiRoute {
   }
 }
 
-void main() async {
+void main(List<String> args) async {
   final ApiServer server = ApiServer(
     openApiConfig: const OpenApiConfig(title: 'Test', authMiddleware: String),
     routeTree: RouteTree(
@@ -95,5 +95,9 @@ void main() async {
     ),
   );
 
-  await server.start(port: 8080, ip: InternetAddress.anyIPv4);
+  await server.start(
+    port: 8080,
+    ip: InternetAddress.anyIPv4,
+    args: args,
+  );
 }

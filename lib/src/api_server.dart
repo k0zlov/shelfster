@@ -62,10 +62,10 @@ class ApiServer {
     _server = await serve(combinedHandler, ip ?? InternetAddress.anyIPv4, port);
 
     final bool firstStart =
-        args?.any((arg) => arg.startsWith('--first-start=')) ?? false;
+        args?.any((arg) => arg.startsWith('--first-start')) ?? true;
 
     if (firstStart) {
-      print('Server running at ${_server?.address}:${_server?.port}');
+      print('Server running at ${_server?.address.host}:${_server?.port}');
     }
 
     _server!.autoCompress = true;

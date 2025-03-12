@@ -14,18 +14,18 @@ Future<void> runServer({
   Timer? reloadTimer;
 
   Future<void> startServer() async {
-    serverProcess = await Process.start(
-      'dart',
-      [
-        serverPath,
-        '--first-start==$firstStart',
-      ],
-      mode: ProcessStartMode.detachedWithStdio,
-    );
+    final List<String> args = [serverPath];
 
     if (firstStart) {
+      args.add('--first-start');
       firstStart = false;
     }
+
+    serverProcess = await Process.start(
+      'dart',
+      args,
+      mode: ProcessStartMode.detachedWithStdio,
+    );
 
     serverProcess!.stdout.transform(utf8.decoder).listen(stdout.write);
     serverProcess!.stderr.transform(utf8.decoder).listen(stderr.write);
