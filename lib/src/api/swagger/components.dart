@@ -131,6 +131,7 @@ class OpenApiSchema {
   final OpenApiSchema? items;
   final List<String>? enumValues;
   final String? ref;
+  final List<String>? required; // Added this
 
   OpenApiSchema({
     this.type,
@@ -138,22 +139,25 @@ class OpenApiSchema {
     this.items,
     this.enumValues,
     this.ref,
+    this.required,
   });
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> json = {};
 
     if (ref != null) {
-      json['\$ref'] = ref;
+      json[r'$ref'] = ref;
     } else {
       if (type != null) json['type'] = type;
       if (properties != null) {
         json['properties'] = {
-          for (var entry in properties!.entries) entry.key: entry.value.toJson()
+          for (var entry in properties!.entries)
+            entry.key: entry.value.toJson(),
         };
       }
       if (items != null) json['items'] = items!.toJson();
       if (enumValues != null) json['enum'] = enumValues;
+      if (required != null && required!.isNotEmpty) json['required'] = required;
     }
 
     return json;

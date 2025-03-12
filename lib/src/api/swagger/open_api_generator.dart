@@ -119,7 +119,17 @@ class OpenApiGenerator {
       required: true,
       content: {
         'application/json': OpenApiMedia(
-          schema: OpenApiSchema(type: 'object'),
+          schema: OpenApiSchema(
+            type: 'object',
+            properties: {
+              for (final field in endpoint.bodySchema)
+                field.name: OpenApiSchema(type: _getSchemaType(field.type)),
+            },
+            required: [
+              for (final field in endpoint.bodySchema)
+                if (field.isRequired) field.name,
+            ],
+          ),
         ),
       },
     );

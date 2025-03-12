@@ -12,7 +12,22 @@ class TestRoute extends ApiRoute {
         ApiEndpoint.get(
           middlewares: [String],
           description: '123',
+          bodySchema: {
+            Field<String>('id', isRequired: true),
+          },
           name: 'register',
+          handler: handler,
+        ),
+        ApiEndpoint.get(
+          middlewares: [String],
+          description: '123',
+          bodySchema: {
+            Field<String>('id', isRequired: true),
+          },
+          querySchema: {
+            Field<int>('id', isRequired: true),
+          },
+          name: '<id>',
           handler: handler,
         ),
       };

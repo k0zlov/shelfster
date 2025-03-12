@@ -42,4 +42,15 @@ abstract class ApiHandler {
       return await _handler(context);
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ApiHandler &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          method == other.method;
+
+  @override
+  int get hashCode => name.hashCode ^ method.hashCode;
 }
