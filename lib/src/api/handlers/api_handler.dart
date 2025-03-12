@@ -16,11 +16,7 @@ abstract class ApiHandler {
     this.middlewares = const [],
     this.bodySchema = const {},
     this.querySchema = const {},
-  })  : assert(
-          name.isNotEmpty,
-          'Endpoint name cannot be empty',
-        ),
-        _handler = handler;
+  }) : _handler = handler;
 
   final String name;
   final String description;

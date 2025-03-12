@@ -29,16 +29,12 @@ class OpenApiGenerator {
 
         final String path = _formatPath('/${route.name}/${handler.name}');
 
-        paths[path] = OpenApiPath(
-          operations: {
-            handler.method.name.toLowerCase(): _generateEndpointSpec(
-              handler,
-              route.name,
-              path,
-              config,
-            ),
-          },
-        );
+        if (!paths.containsKey(path)) {
+          paths[path] = OpenApiPath(operations: {});
+        }
+
+        paths[path]!.operations[handler.method.name.toLowerCase()] =
+            _generateEndpointSpec(handler, route.name, path, config);
       }
     }
 

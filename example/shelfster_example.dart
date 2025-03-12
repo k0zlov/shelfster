@@ -9,28 +9,79 @@ FutureOr<Response> handler(RequestContext context) => Response.ok('123');
 class TestRoute extends ApiRoute {
   @override
   Set<ApiHandler> get handlers => {
-        ApiEndpoint.get(
-          middlewares: [String],
-          description: '123',
-          bodySchema: {
-            Field<String>('id', isRequired: true),
-          },
-          name: 'register',
-          handler: handler,
-        ),
-        ApiEndpoint.get(
-          middlewares: [String],
-          description: '123',
-          bodySchema: {
-            Field<String>('id', isRequired: true),
-          },
-          querySchema: {
-            Field<int>('id', isRequired: true),
-          },
-          name: '<id>',
-          handler: handler,
-        ),
+        register,
+        updateUser,
+        getUser,
+        login,
+        deleteUser,
+        checkToken,
       };
+
+  ApiEndpoint get register {
+    return ApiEndpoint(
+      method: HttpMethod.POST,
+      name: 'register',
+      description: 'Test description.',
+      bodySchema: {
+        Field<String>('name'),
+        Field<String>('surname'),
+        Field<String>('email'),
+        Field<String>('password'),
+      },
+      handler: handler,
+    );
+  }
+
+  ApiEndpoint get updateUser {
+    return ApiEndpoint(
+      method: HttpMethod.PUT,
+      name: '',
+      bodySchema: {
+        Field<String>('name'),
+        Field<String>('surname'),
+        Field<String>('email'),
+        Field<String>('password'),
+      },
+      handler: handler,
+    );
+  }
+
+  ApiEndpoint get getUser {
+    return ApiEndpoint(
+      method: HttpMethod.GET,
+      name: '',
+      handler: handler,
+    );
+  }
+
+  ApiEndpoint get deleteUser {
+    return ApiEndpoint(
+      method: HttpMethod.DELETE,
+      name: '',
+      handler: handler,
+    );
+  }
+
+  ApiEndpoint get login {
+    return ApiEndpoint(
+      method: HttpMethod.POST,
+      name: 'login',
+      bodySchema: {
+        Field<String>('email'),
+        Field<String>('password'),
+      },
+      handler: handler,
+    );
+  }
+
+  /// Endpoint for microservice integration
+  ApiEndpoint get checkToken {
+    return ApiEndpoint(
+      method: HttpMethod.GET,
+      name: 'check/<token>',
+      handler: handler,
+    );
+  }
 }
 
 void main() async {
