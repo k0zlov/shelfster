@@ -35,7 +35,7 @@ class ApiException implements Exception {
     this.errors = const [],
   }) : statusCode = HttpStatus.forbidden;
 
-  const ApiException.notFound({this.message = 'Resource was not found'})
+  const ApiException.notFound([this.message = 'Resource was not found'])
       : statusCode = HttpStatus.notFound,
         errors = const [];
 
