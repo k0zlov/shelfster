@@ -91,13 +91,13 @@ class RequestContext {
   }
 
   Future<Map<String, dynamic>> _json() async {
-    final String body = await _body();
-
-    if (body.isEmpty) return {};
-
-    final dynamic json = jsonDecode(await _body());
+    Map<String, dynamic> json;
     try {
-      json as Map<String, dynamic>;
+      final String body = await _body();
+
+      if (body.isEmpty) return {};
+
+      json = jsonDecode(await _body()) as Map<String, dynamic>;
     } catch (e) {
       throw const ApiException.badRequest('Invalid body data type.');
     }
