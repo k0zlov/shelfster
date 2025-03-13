@@ -12,14 +12,16 @@ abstract class ApiHandler {
     required this.method,
     required this.name,
     required AppHandler handler,
-    this.description = '',
+    this.description,
+    this.summary,
     this.middlewares = const [],
     this.bodySchema = const {},
     this.querySchema = const {},
   }) : _handler = handler;
 
   final String name;
-  final String description;
+  final String? description;
+  final String? summary;
   final List<Object> middlewares;
   final AppHandler _handler;
   final HttpMethod method;

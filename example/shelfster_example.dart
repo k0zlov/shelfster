@@ -8,6 +8,9 @@ FutureOr<Response> handler(RequestContext context) => Response.ok('123');
 
 class TestRoute extends ApiRoute {
   @override
+  String? get description => 'some description';
+
+  @override
   Set<ApiHandler> get handlers => {
         register,
         updateUser,
@@ -21,6 +24,7 @@ class TestRoute extends ApiRoute {
     return ApiEndpoint(
       method: HttpMethod.POST,
       name: 'register',
+      summary: 'Test summary',
       description: 'Test description.',
       bodySchema: {
         Field<String>('name'),
@@ -86,7 +90,17 @@ class TestRoute extends ApiRoute {
 
 void main(List<String> args) async {
   final ApiServer server = ApiServer(
-    openApiConfig: const OpenApiConfig(title: 'Test', authMiddleware: String),
+    openApiConfig: OpenApiConfig(
+      authMiddleware: String,
+      info: OpenApiInfo(
+        title: 'Users-Api',
+        description: 'Some description',
+        contact: OpenApiContact(
+          name: 'Ivan Kozlov',
+          email: 'ivankozlov0624@gmail.com',
+        ),
+      ),
+    ),
     routeTree: RouteTree(
       middlewareMapping: {String: logRequests()},
       routes: [

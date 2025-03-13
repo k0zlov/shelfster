@@ -15,6 +15,14 @@ class RequestParameters {
 
   late final Map<String, String> path;
 
+  Future<Map<String, dynamic>> call() async {
+    return {
+      ...query,
+      ...(await body),
+      ...path,
+    };
+  }
+
   Map<String, String> _parsePathParams(
     List<String> uriSegments,
     String routePattern,

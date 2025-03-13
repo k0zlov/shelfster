@@ -8,6 +8,7 @@ export 'package:shelfster/src/api/route/api_route.dart';
 export 'package:shelfster/src/api/route/http_method.dart';
 export 'package:shelfster/src/api/route/middlewares/default_middleware.dart';
 export 'package:shelfster/src/api/route/route_tree.dart';
+export 'package:shelfster/src/api/swagger/components.dart';
 export 'package:shelfster/src/api/swagger/open_api_generator.dart';
 export 'package:shelfster/src/api_server.dart';
 export 'package:shelfster/src/run_server.dart';

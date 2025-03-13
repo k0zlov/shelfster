@@ -3,6 +3,8 @@ import 'package:shelfster/shelfster.dart';
 abstract class ApiRoute {
   const ApiRoute();
 
+  String? get description => null;
+
   String get name {
     final className = runtimeType.toString();
     final firstWord = className.split(RegExp('(?=[A-Z])')).first.toLowerCase();

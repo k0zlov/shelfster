@@ -73,8 +73,9 @@ class ApiServer {
 
   /// Generates openapi.json and mounts Swagger UI on /docs
   void _generateUtilityRoute() {
+    openApiConfig.info.version = _apiVersion;
+
     final spec = OpenApiGenerator.generate(
-      apiVersion: _apiVersion,
       routes: routeTree.routes,
       config: openApiConfig,
     );
